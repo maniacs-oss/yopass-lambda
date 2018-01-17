@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  GetSecret:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      Policies: AmazonDynamoDBFullAccess
+      Environment:
+        Variables: 
+          TABLE_NAME:
+            Ref: YopassTable
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /secret/{secretID}
+            Method: get
+  CreateSecret:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: createHandler
+      Runtime: go1.x
+      Policies: AmazonDynamoDBFullAccess
+      Environment:
+        Variables: 
+          TABLE_NAME:
+            Ref: YopassTable
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /secret
+            Method: post
+  YopassTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      AttributeDefinitions: 
+        - AttributeName: id
+          AttributeType: S
+      KeySchema: 
+        - AttributeName: id
+          KeyType: HASH
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
