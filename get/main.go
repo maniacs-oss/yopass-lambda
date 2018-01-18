@@ -15,24 +15,15 @@ import (
 //GetSecret returns secrets from dynamo
 func GetSecret(request events.APIGatewayProxyRequest, db yopass.Database) (events.APIGatewayProxyResponse, error) {
 	if _, ok := request.PathParameters["secretID"]; !ok {
-		return events.APIGatewayProxyResponse{
-			Body:       "SecretId missing",
-			StatusCode: http.StatusBadRequest,
-		}, nil
+		return yopass.Response("SecretId missing", http.StatusBadRequest)
 	}
 	secret, err := db.Get(request.PathParameters["secretID"])
 	if err != nil {
 		fmt.Println(err)
-		return events.APIGatewayProxyResponse{
-			Body:       "Secret not found",
-			StatusCode: http.StatusBadRequest,
-		}, nil
+		return yopass.Response("Secret not found", http.StatusBadRequest)
 	}
 	resp, _ := json.Marshal(map[string]string{"secret": string(secret), "message": "OK"})
-	return events.APIGatewayProxyResponse{
-		Body:       string(resp),
-		StatusCode: 200,
-	}, nil
+	return yopass.Response(string(resp), 200)
 }
 
 func main() {

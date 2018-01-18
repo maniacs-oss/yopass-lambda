@@ -31,38 +31,26 @@ func CreateSecret(request events.APIGatewayProxyRequest, db yopass.Database) (ev
 	}
 	err := json.Unmarshal([]byte(request.Body), &secret)
 	if err != nil {
-		return events.APIGatewayProxyResponse{
-			Body:       `{"message": "Unable to parse json"}`,
-			StatusCode: http.StatusBadRequest,
-		}, nil
+		return yopass.Response(`{"message": "Unable to parse json"}`, http.StatusBadRequest)
 	}
 
 	if !validExpiration(secret.Expiration) {
-		return events.APIGatewayProxyResponse{
-			Body:       `{"message": "Invalid expiration specified"}`,
-			StatusCode: http.StatusBadRequest,
-		}, nil
+		return yopass.Response(`{"message": "Invalid expiration specified"}`, http.StatusBadRequest)
 	}
 
 	if len(secret.Message) > 10000 {
-		return events.APIGatewayProxyResponse{
-			Body:       `{"message": "Message is too long"}`,
-			StatusCode: http.StatusBadRequest,
-		}, nil
+		return yopass.Response(`{"message": "Message is too long"}`, http.StatusBadRequest)
 	}
 	key := uuid.NewV4().String()
 	err = db.Put(key, secret.Message, secret.Expiration)
 	if err != nil {
 		fmt.Println(err)
-		return events.APIGatewayProxyResponse{
-			Body:       `{"message": "Failed to store secret in database"}`,
-			StatusCode: http.StatusInternalServerError,
-		}, nil
+		return yopass.Response(`{"message": "Failed to store secret in database"}`,
+			http.StatusInternalServerError)
 	}
-	return events.APIGatewayProxyResponse{
-		Body:       fmt.Sprintf(`{"key": "%s", "message": "OK"}`, key),
-		StatusCode: 200,
-	}, nil
+	return yopass.Response(
+		fmt.Sprintf(`{"key": "%s", "message": "OK"}`, key),
+		http.StatusOK)
 }
 
 func main() {
