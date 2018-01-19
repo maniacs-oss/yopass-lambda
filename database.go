@@ -49,7 +49,17 @@ func (d *Dynamo) Get(key string) (string, error) {
 
 // Delete item
 func (d *Dynamo) Delete(key string) error {
-	return nil
+	input := &dynamodb.DeleteItemInput{
+		Key: map[string]*dynamodb.AttributeValue{
+			"id": {
+				S: aws.String(key),
+			},
+		},
+		TableName: aws.String(d.tableName),
+	}
+
+	_, err := d.svc.DeleteItem(input)
+	return err
 }
 
 // Put item in Dynamo

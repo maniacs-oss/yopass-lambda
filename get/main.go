@@ -22,6 +22,10 @@ func GetSecret(request events.APIGatewayProxyRequest, db yopass.Database) (event
 		fmt.Println(err)
 		return yopass.Response("Secret not found", http.StatusBadRequest)
 	}
+	err = db.Delete(request.PathParameters["secretID"])
+	if err != nil {
+		return yopass.Response("Failed to clear secret", http.StatusInternalServerError)
+	}
 	resp, _ := json.Marshal(map[string]string{"secret": string(secret), "message": "OK"})
 	return yopass.Response(string(resp), 200)
 }
