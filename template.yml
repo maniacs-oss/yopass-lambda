@@ -4,7 +4,7 @@ Resources:
   GetSecret:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: main
+      Handler: getHandler
       Runtime: go1.x
       Policies: AmazonDynamoDBFullAccess
       Environment:
