@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  name = "github.com/akrylysov/algnhsa"
+  packages = ["."]
+  revision = "998ff3971698200bd46e66fdb3ebe5362c6ab9ab"
+  version = "v0.4"
+
+[[projects]]
   name = "github.com/aws/aws-lambda-go"
   packages = [
     "events",
@@ -57,6 +63,12 @@
   revision = "0b12d6b5"
 
 [[projects]]
+  name = "github.com/julienschmidt/httprouter"
+  packages = ["."]
+  revision = "8c199fb6259ffc1af525cc3ad52ee60ba8359669"
+  version = "v1.1"
+
+[[projects]]
   name = "github.com/satori/go.uuid"
   packages = ["."]
   revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
@@ -65,6 +77,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ee9634d395b3d20c4d321cbb0731d8a275d5cef47e2c06c38f7667768c59739e"
+  inputs-digest = "144256d4f94ad0e6db8bac114e8661fd8a11463828473b300a5a7988d91d5d8c"
   solver-name = "gps-cdcl"
   solver-version = 1
