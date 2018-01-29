@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 Resources:
-  GetSecret:
+  API:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: getHandler
+      Handler: main
       Runtime: go1.x
       Policies: AmazonDynamoDBFullAccess
       Environment:
@@ -12,27 +12,11 @@ Resources:
           TABLE_NAME:
             Ref: YopassTable
       Events:
-        GetEvent:
+        Yopass:
           Type: Api
           Properties:
-            Path: /secret/{secretID}
-            Method: get
-  CreateSecret:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: createHandler
-      Runtime: go1.x
-      Policies: AmazonDynamoDBFullAccess
-      Environment:
-        Variables: 
-          TABLE_NAME:
-            Ref: YopassTable
-      Events:
-        GetEvent:
-          Type: Api
-          Properties:
-            Path: /secret
-            Method: post
+            Path: /{proxy+}
+            Method: any
   YopassTable:
     Type: AWS::DynamoDB::Table
     Properties:

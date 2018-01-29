@@ -15,8 +15,8 @@
     "lambda/messages",
     "lambdacontext"
   ]
-  revision = "28a6e9fa1fc02d45d9a8c0a8d22c7d5c3580aa03"
-  version = "v1.0.0"
+  revision = "6e2e37798efbb1dfd8e9c6681702e683a6046517"
+  version = "v1.0.1"
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
@@ -48,8 +48,14 @@
     "service/dynamodb",
     "service/sts"
   ]
-  revision = "9ed0c8de252f04ac45a65358377103d5a1aa2d92"
-  version = "v1.12.66"
+  revision = "1b176c5c6b57adb03bb982c21930e708ebca5a77"
+  version = "v1.12.70"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/bradfitz/gomemcache"
+  packages = ["memcache"]
+  revision = "1952afaa557dc08e8e0d89eafab110fb501c1a2b"
 
 [[projects]]
   name = "github.com/go-ini/ini"
@@ -58,15 +64,33 @@
   version = "v1.32.0"
 
 [[projects]]
+  name = "github.com/gorilla/context"
+  packages = ["."]
+  revision = "1ea25387ff6f684839d82767c1733ff4d4d15d0a"
+  version = "v1.1"
+
+[[projects]]
+  name = "github.com/gorilla/handlers"
+  packages = ["."]
+  revision = "90663712d74cb411cbef281bc1e08c19d1a76145"
+  version = "v1.3.0"
+
+[[projects]]
+  name = "github.com/gorilla/mux"
+  packages = ["."]
+  revision = "53c1911da2b537f792e7cafcb446b05ffe33b996"
+  version = "v1.6.1"
+
+[[projects]]
+  name = "github.com/jhaals/yopass"
+  packages = ["."]
+  revision = "ecfc92920a57900d1f80b968f0552e22b4552278"
+  version = "5.0.1"
+
+[[projects]]
   name = "github.com/jmespath/go-jmespath"
   packages = ["."]
   revision = "0b12d6b5"
-
-[[projects]]
-  name = "github.com/julienschmidt/httprouter"
-  packages = ["."]
-  revision = "8c199fb6259ffc1af525cc3ad52ee60ba8359669"
-  version = "v1.1"
 
 [[projects]]
   name = "github.com/satori/go.uuid"
@@ -77,6 +101,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "144256d4f94ad0e6db8bac114e8661fd8a11463828473b300a5a7988d91d5d8c"
+  inputs-digest = "bc6f5a12958ec8b6f6328d5bd57199d1125451941e36808c31081422fcd3348c"
   solver-name = "gps-cdcl"
   solver-version = 1

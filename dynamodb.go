@@ -1,4 +1,4 @@
-package yopass
+package main
 
 import (
 	"fmt"
@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+	yopass "github.com/jhaals/yopass"
 )
 
 // Dynamo Database implementation
@@ -16,7 +17,7 @@ type Dynamo struct {
 }
 
 // NewDynamo returns a database client
-func NewDynamo(tableName string) Database {
+func NewDynamo(tableName string) yopass.Database {
 	return &Dynamo{tableName: tableName, svc: dynamodb.New(session.New())}
 }
 
